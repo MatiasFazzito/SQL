@@ -1,10 +1,125 @@
-Base de datos pensada para un software de control logistico de conciertos y eventos donde se puede hacer seguimiento de las bandas/artistas que tocaran en el evento y el estadio donde sera realizado, asignando al evento miembros del staff medico y de seguridad basado en la cantidad de entradas vendidas, estabeciendo un minimo requerido al momento del evento y una recomendacion basada en la capacidad maxima del estadio. El calculo se basara en los estandares de seguridad requeridos en cada pais. Inicialmente para fines de presentacion y prueba el modelo se basara en la Republica Argentina con capacidad de ser adaptado a distintos rubros ademas del presentado originalmente modificando los parametros a la hora de instalacion.
-Se toma como base un evento musical donde es establecido un minimo de 1 paramedico y 1 bombero cada 20 personas a igual que 3 rescatistas y 3 policias o encargados de seguridad cada 20 personas.
+# 🎶 Logistics Control Database for Concerts and Events
 
-Tablas utilizadas:
-1. Bands: Tabla madre que posee la informacion relevante de las bandas/artistas cargados en la BD (ID {INT Primary Key}, Name {Varchar}, Members {INT}, Nationality {Varchar}, Language {Varchar}, Genre{Varchar})
-2. Stadium: Tabla madre que posee la informacion relevante del estadio o predio donde se realizara el evento (ID {INT Primary Key}, Name {Varchar}, Country {Varchar}, Capacity {INT})
-3. Staff: Tabla madre que posee la informacion relevante de los miembros del staff cargados en la BD (ID {INT Primary Key}, Name {Varchar}, Gender {Varchar}, Age {INT}, Specialty {INT Foreign key})
-4. Specialty: Tabla de referencia que almacena con un ID la especialidad del staff (ID {INT Primary Key}, Name {Varchar})
-5. Concert: Tabla de relacion que recibe los ID de band y stadium ademas de poseer como dato propio la cantidad de tickets vendidos(ID {INT Primary Key}, Tickets_Sold {INT}, Band {INT Foreign key}, Stadium {INT Foreign key})
-6. Asignation: tabla de relacion que recibe los ID de concert y staff (ID {INT Primary Key}, Concert {INT Foreign key}, Staff {INT Foreign key})
+This database is designed for a **logistics control software** for concerts and events. It allows tracking of:
+
+- The **bands/artists** performing at each event
+- The **stadium** where the event takes place
+- The **medical and security staff** assigned based on ticket sales
+
+The system dynamically assigns staff based on ticket sales, ensuring a **minimum required presence** during the event and providing **recommendations** based on the **maximum stadium capacity**. The calculation follows **safety standards** required by each country.
+
+> 🛠️ **Note:** For presentation and testing purposes, the initial model is based on the **Republic of Argentina**, but it can be adapted to other industries or countries by changing the setup parameters.
+
+---
+
+## 📊 Base Safety Requirements (Argentina Example)
+
+For **music events**, the following minimum staffing requirements are established:
+
+- 👩‍⚕️ 1 Paramedic and 👨‍🚒 1 Firefighter per **20 attendees**
+- 🧗‍♂️ 3 Rescue Workers and 👮‍♂️ 3 Police/Security Personnel per **20 attendees**
+
+---
+
+## 🧩 Tables Overview
+
+### 1. `Bands`
+
+Stores relevant data about the bands or artists.
+
+| Field       | Type            | Description                     |
+|-------------|------------------|---------------------------------|
+| ID          | `INT` (PK)       | Unique band/artist identifier   |
+| Name        | `VARCHAR`        | Name of the band/artist         |
+| Members     | `INT`            | Number of members               |
+| Nationality | `VARCHAR`        | Country of origin               |
+| Language    | `VARCHAR`        | Primary language                |
+| Genre       | `VARCHAR`        | Music genre                     |
+
+---
+
+### 2. `Stadium`
+
+Stores information about event venues.
+
+| Field    | Type            | Description                       |
+|----------|------------------|-----------------------------------|
+| ID       | `INT` (PK)       | Unique stadium identifier         |
+| Name     | `VARCHAR`        | Stadium name                      |
+| Country  | `VARCHAR`        | Location country                  |
+| Capacity | `INT`            | Maximum audience capacity         |
+
+---
+
+### 3. `Staff`
+
+Stores information about personnel available for event assignments.
+
+| Field     | Type            | Description                       |
+|-----------|------------------|-----------------------------------|
+| ID        | `INT` (PK)       | Unique staff identifier           |
+| Name      | `VARCHAR`        | Staff member name                 |
+| Gender    | `VARCHAR`        | Gender                            |
+| Age       | `INT`            | Age                               |
+| Specialty | `INT` (FK)       | Reference to `Specialty` table    |
+
+---
+
+### 4. `Specialty`
+
+Reference table for staff specializations.
+
+| Field | Type            | Description             |
+|--------|------------------|-------------------------|
+| ID     | `INT` (PK)       | Unique specialty ID     |
+| Name   | `VARCHAR`        | Name of the specialty   |
+
+---
+
+### 5. `Concert`
+
+Associates bands with stadiums and includes ticket sales data.
+
+| Field        | Type            | Description                     |
+|--------------|------------------|---------------------------------|
+| ID           | `INT` (PK)       | Unique concert identifier       |
+| Tickets_Sold | `INT`            | Number of tickets sold          |
+| Band         | `INT` (FK)       | Reference to `Bands` table      |
+| Stadium      | `INT` (FK)       | Reference to `Stadium` table    |
+
+---
+
+### 6. `Asignation`
+
+Assigns staff members to specific concerts.
+
+| Field   | Type            | Description                     |
+|----------|------------------|---------------------------------|
+| ID       | `INT` (PK)       | Unique assignment ID           |
+| Concert  | `INT` (FK)       | Reference to `Concert` table   |
+| Staff    | `INT` (FK)       | Reference to `Staff` table     |
+
+---
+
+## 🧩 Future Adaptability
+
+This model is scalable and adaptable for:
+
+- Different **types of events** (sports, conferences, etc.)
+- Other **countries and regulations**
+- Alternative **staffing rules and parameters**
+
+All of this can be configured during the installation phase.
+
+---
+
+## 📁 Use Cases
+
+- 🎤 Concert safety planning  
+- 🏟️ Stadium event logistics  
+- 🧑‍⚕️ Automated staff assignment based on crowd size  
+- 📊 Simulation and testing for different event types
+
+---
+
+> 🚀 Built with flexibility and real-world scenarios in mind.
