@@ -16,8 +16,8 @@ El sistema asigna dinámicamente al personal requerido según la venta de entrad
 
 Para eventos **musicales**, se establece el siguiente mínimo obligatorio de personal:
 
-- 👩‍⚕️ 1 Paramédico y 👨‍🚒 1 Bombero cada **20 asistentes**
-- 🧗‍♂️ 3 Rescatistas y 👮‍♂️ 3 Policías/Encargados de seguridad cada **20 asistentes**
+- 👩‍⚕️ 1 Paramédico y 👨‍🚒 1 Bombero cada **200 asistentes**
+- 🧗‍♂️ 3 Rescatistas y 👮‍♂️ 3 Policías/Encargados de seguridad cada **200 asistentes**
 
 ---
 
