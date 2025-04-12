@@ -16,8 +16,8 @@ The system dynamically assigns staff based on ticket sales, ensuring a **minimum
 
 For **music events**, the following minimum staffing requirements are established:
 
-- 👩‍⚕️ 1 Paramedic and 👨‍🚒 1 Firefighter per **20 attendees**
-- 🧗‍♂️ 3 Rescue Workers and 👮‍♂️ 3 Police/Security Personnel per **20 attendees**
+- 👩‍⚕️ 1 Paramedic and 👨‍🚒 1 Firefighter per **200 attendees**
+- 🧗‍♂️ 3 Rescue Workers and 👮‍♂️ 3 Police/Security Personnel per **200 attendees**
 
 ---
 
