@@ -70,3 +70,16 @@ CREATE TABLE `asignation` (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 )  ENGINE=INNODB DEFAULT CHARACTER SET=UTF8MB4;
 
+DELIMITER $$
+
+CREATE TRIGGER after_concert_insert
+AFTER INSERT ON concert
+FOR EACH ROW
+BEGIN
+    CALL assign_specialty_to_concert(NEW.ID, 1); -- Paramédico
+    CALL assign_specialty_to_concert(NEW.ID, 2); -- Bombero
+    CALL assign_specialty_to_concert(NEW.ID, 3); -- Rescatista
+    CALL assign_specialty_to_concert(NEW.ID, 4); -- Policía
+END$$
+
+DELIMITER ;
