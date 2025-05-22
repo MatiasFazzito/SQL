@@ -1,4 +1,5 @@
 -- Mock Data insertion for testing
+USE concertio ;
 
 INSERT INTO Bands (`Name`, `Members`, `Nationality`, `Language`, `Genre`) VALUES
 ('The Beatles', 4, 'British', 'English', 'Rock'),
@@ -52,10 +53,10 @@ INSERT INTO Concert (`Tickets_Sold`, `Band`, `Stadium`) VALUES
 (26000, 15, 14);-- Los Fabulosos Cadillacs en 15 de Abril
 
 INSERT INTO Specialty (`Name`) VALUES
-('Paramedico'),
-('Bombero'),
-('Rescatista'),
-('Policia');
+('Paramedic'),
+('Firemen'),
+('Rescatist'),
+('Security');
 
 INSERT INTO Staff (`Name`, `Gender`, `Age`, `Specialty`) VALUES
 ('Carlos Paredes', 'M', 35, 4),
@@ -2059,4 +2060,4 @@ INSERT INTO Staff (`Name`, `Gender`, `Age`, `Specialty`) VALUES
 ('Julián Duarte', 'M', 46, 3),
 ('Lucas López', 'M', 44, 2);
 
--- INSERT INTO Asignation (`Concert`, `Staff`) VALUES
+CALL asign_staff_to_all_concerts();
