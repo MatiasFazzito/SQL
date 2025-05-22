@@ -101,6 +101,173 @@ Asigna miembros del staff a conciertos específicos.
 
 ---
 
+## 🧠 Funciones Definidas en la Base de Datos
+
+Esta sección detalla las funciones creadas en la base de datos, su propósito y cómo interactúan con los datos existentes. Estas funciones están diseñadas para automatizar el cálculo del personal requerido según la especialidad y la cantidad de entradas vendidas.
+
+---
+
+### 🔧 `get_specialty_multiplier(p_specialty INT)`
+
+**Descripción:**  
+Devuelve el multiplicador asociado a cada especialidad del staff según los requisitos mínimos de personal por tipo para eventos.
+
+**Objetivo:**  
+Establecer la proporción de personal requerido por cada tipo de especialidad según los estándares establecidos. Esta función es utilizada internamente para calcular la cantidad de personal necesario de una especialidad específica.
+
+**Valores devueltos según `p_specialty`:**
+
+| Especialidad (`p_specialty`) | Multiplicador | Descripción      |
+|-----------------------------|----------------|------------------|
+| 1                           | 1              | Paramédico       |
+| 2                           | 1              | Bombero          |
+| 3                           | 3              | Rescatista       |
+| 4                           | 3              | Policía/Seguridad|
+| Otro                        | 0              | Sin asignación   |
+
+**Tablas relacionadas:**  
+- `Specialty`: Se basa en los IDs de especialidad, aunque no accede directamente a la tabla.
+
+---
+
+### 🔧 `get_required_staff(p_tickets INT, p_specialty INT)`
+
+**Descripción:**  
+Calcula la cantidad total de personal requerido para una especialidad dada, basado en la cantidad de entradas vendidas.
+
+**Objetivo:**  
+Determinar cuántos miembros del staff se necesitan de una especialidad específica para un evento determinado, aplicando las reglas proporcionales (por cada 200 tickets vendidos).
+
+**Fórmula utilizada:**
+
+```sql
+CEIL(get_specialty_multiplier(p_specialty) * p_tickets / 200)
+```
+
+---
+
+## 🔍 Listado de Vistas Definidas
+
+Esta sección describe las vistas creadas en la base de datos para facilitar el acceso a información compuesta y mejorar la legibilidad de los datos. Las vistas permiten obtener resultados combinando múltiples tablas sin necesidad de escribir consultas complejas cada vez.
+
+---
+
+### 📄 `asignation_details`
+
+**Descripción:**  
+Muestra una relación entre cada asignación de personal, el nombre del miembro del staff asignado y el estadio donde trabajará.
+
+**Objetivo:**  
+Facilitar el seguimiento de qué miembro del staff fue asignado a qué evento y en qué estadio prestará servicio.
+
+**Tablas involucradas:**
+- `asignation`: Relación entre conciertos y personal.
+- `staff`: Contiene los datos del personal.
+- `concert`: Conciertos donde se asigna el personal.
+- `stadium`: Lugar donde se realiza el evento.
+
+**Columnas devueltas:**
+- `Asignation_ID`
+- `Staff_Name`
+- `Stadium_Name`
+
+---
+
+### 📄 `concert_details`
+
+**Descripción:**  
+Proporciona detalles resumidos de cada concierto, especificando qué banda tocará y en qué estadio se realizará.
+
+**Objetivo:**  
+Ofrecer una vista rápida de los eventos programados, incluyendo las bandas y los lugares asociados.
+
+**Tablas involucradas:**
+- `concert`: Contiene los conciertos registrados.
+- `bands`: Datos de las bandas o artistas.
+- `stadium`: Información de los estadios.
+
+**Columnas devueltas:**
+- `Concert_ID`
+- `Band_Name`
+- `Stadium_Name`
+
+---
+
+### 📄 `staff_details`
+
+**Descripción:**  
+Muestra una lista detallada del personal, con su nombre y la especialidad asignada.
+
+**Objetivo:**  
+Simplificar la identificación del staff según su especialidad sin necesidad de hacer múltiples uniones en las consultas.
+
+**Tablas involucradas:**
+- `staff`: Información del personal.
+- `specialty`: Detalles de cada especialidad.
+
+**Columnas devueltas:**
+- `Staff_ID`
+- `Staff_Name`
+- `Specialty_Name`
+
+---
+
+## ⚙️ Listado de Stored Procedures
+
+Esta sección documenta los procedimientos almacenados definidos en la base de datos. Estos procedimientos permiten automatizar tareas críticas como la asignación de personal a los conciertos según su especialidad y la cantidad de entradas vendidas, reduciendo la posibilidad de errores y mejorando la eficiencia operativa.
+
+---
+
+### 📌 `assign_specialty_to_concert(p_concert_id INT, p_specialty INT)`
+
+**Descripción:**  
+Asigna automáticamente miembros del staff de una especialidad determinada a un concierto específico, de forma proporcional a la cantidad de entradas vendidas.
+
+**Objetivo y beneficios:**  
+- Automatiza la asignación de personal específico (paramédicos, bomberos, rescatistas, policías).
+- Evita duplicidad en las asignaciones (verifica que el staff no esté previamente asignado al mismo concierto).
+- Se adapta a los requerimientos dinámicos de personal según la demanda (entradas vendidas).
+
+**Funcionamiento:**  
+1. Consulta la cantidad de entradas vendidas (`concert`).
+2. Calcula el número requerido de personal según especialidad (`get_required_staff`).
+3. Utiliza un cursor para recorrer los miembros del staff disponibles de esa especialidad.
+4. Inserta las asignaciones hasta completar el número necesario.
+
+**Tablas involucradas:**
+- `concert`: para obtener las entradas vendidas.
+- `staff`: para seleccionar personal disponible según especialidad.
+- `asignation`: para registrar las asignaciones de staff a conciertos.
+
+**Funciones utilizadas:**
+- `get_required_staff()`
+
+---
+
+### 📌 `asign_staff_to_all_concerts()`
+
+**Descripción:**  
+Realiza la asignación de personal para **todas las especialidades** en **todos los conciertos** registrados en la base de datos.
+
+**Objetivo y beneficios:**  
+- Ejecuta en un solo paso la asignación completa del personal a todos los eventos.
+- Útil para simulaciones, pruebas o cargas iniciales de datos.
+- Garantiza que todos los conciertos tengan al menos el personal mínimo requerido por especialidad.
+
+**Funcionamiento:**  
+1. Recorre todos los conciertos registrados mediante un cursor.
+2. Para cada concierto, llama al procedimiento `assign_specialty_to_concert` para cada tipo de especialidad (1 a 4).
+
+**Tablas involucradas:**
+- `concert`: para recorrer todos los eventos.
+- `asignation`: para insertar las asignaciones resultantes.
+- `staff`: accedida indirectamente por el procedimiento interno.
+
+**Procedimientos utilizados:**
+- `assign_specialty_to_concert()`
+
+---
+
 ## 🧩 Adaptabilidad Futura
 
 Este modelo es escalable y adaptable a:
