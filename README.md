@@ -101,6 +101,48 @@ Assigns staff members to specific concerts.
 
 ---
 
+## ⚡ Defined Trigger
+
+This section documents the trigger created in the database, explaining its purpose, functionality, and which procedures it automatically invokes.
+
+---
+
+### 🧩 `after_concert_insert`
+
+**Description:**  
+Trigger that is automatically executed after a new record is inserted into the `concert` table.
+
+**Purpose:**  
+Immediately assigns the required staff to a newly created concert based on the number of tickets sold and the required specialties. This automation eliminates the need to manually assign personnel after each new concert is added.
+
+**How it works:**  
+When a new concert is inserted, this trigger automatically calls the `assign_specialty_to_concert` procedure for each required staff specialty:
+
+- `1`: Paramedic  
+- `2`: Firefighter  
+- `3`: Rescuer  
+- `4`: Police/Security  
+
+**Trigger code:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER after_concert_insert
+AFTER INSERT ON concert
+FOR EACH ROW
+BEGIN
+    CALL assign_specialty_to_concert(NEW.ID, 1); -- Paramedic
+    CALL assign_specialty_to_concert(NEW.ID, 2); -- Firefighter
+    CALL assign_specialty_to_concert(NEW.ID, 3); -- Rescuer
+    CALL assign_specialty_to_concert(NEW.ID, 4); -- Police/Security
+END$$
+
+DELIMITER ;
+```
+
+---
+
 ## 🧠 Defined Functions in the Database
 
 This section details the functions created in the database, their purpose, and how they interact with existing data. These functions are designed to automate the calculation of the required staff based on specialty and the number of tickets sold.
