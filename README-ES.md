@@ -292,20 +292,21 @@ Asigna automáticamente miembros del staff de una especialidad determinada a un 
 Realiza la asignación de personal para **todas las especialidades** en **todos los conciertos** registrados en la base de datos.
 
 **Objetivo y beneficios:**  
-- Ejecuta en un solo paso la asignación completa del personal a todos los eventos.
-- Útil para simulaciones, pruebas o cargas iniciales de datos.
-- Garantiza que todos los conciertos tengan al menos el personal mínimo requerido por especialidad.
+- Ejecuta en un solo paso la asignación completa del personal a todos los eventos.  
+- Útil para simulaciones, pruebas o cargas iniciales de datos.  
+- Garantiza que todos los conciertos tengan al menos el personal mínimo requerido por especialidad.  
+- **Alternativa al trigger `after_concert_insert`**: este procedimiento puede utilizarse manualmente si el usuario prefiere no activar el trigger automático al insertar conciertos.
 
 **Funcionamiento:**  
-1. Recorre todos los conciertos registrados mediante un cursor.
+1. Recorre todos los conciertos registrados mediante un cursor.  
 2. Para cada concierto, llama al procedimiento `assign_specialty_to_concert` para cada tipo de especialidad (1 a 4).
 
-**Tablas involucradas:**
-- `concert`: para recorrer todos los eventos.
-- `asignation`: para insertar las asignaciones resultantes.
+**Tablas involucradas:**  
+- `concert`: para recorrer todos los eventos.  
+- `asignation`: para insertar las asignaciones resultantes.  
 - `staff`: accedida indirectamente por el procedimiento interno.
 
-**Procedimientos utilizados:**
+**Procedimientos utilizados:**  
 - `assign_specialty_to_concert()`
 
 ---
