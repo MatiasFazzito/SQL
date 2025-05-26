@@ -35,23 +35,6 @@ INSERT INTO Stadium (`Name`, `Country`, `Capacity`) VALUES
 ('Estadio 15 de Abril', 'Argentina', 26500),
 ('Estadio Florencio Sola', 'Argentina', 34901);
 
-INSERT INTO Concert (`Tickets_Sold`, `Band`, `Stadium`) VALUES
-(83714, 1, 1),  -- The Beatles en el Monumental
-(42730, 2, 2),  -- Queen en La Bombonera
-(57000, 3, 5),  -- BTS en Mario Kempes
-(39000, 4, 6),  -- Rammstein en Marcelo Bielsa
-(49800, 5, 9),  -- Metallica en José Amalfitani
-(25000, 6, 10), -- Daft Punk en Diego Maradona
-(34901, 7, 15), -- Café Tacvba en Florencio Sola
-(51000, 8, 4),  -- Coldplay en Presidente Perón
-(46000, 9, 3),  -- Maná en Libertadores de América
-(38000, 10, 7), -- Blackpink en Ciudad de La Plata
-(48314, 11, 11),-- AC/DC en Ducó
-(15000, 12, 12),-- Babymetal en Grondona
-(53000, 13, 8), -- Imagine Dragons en Gigante de Arroyito
-(25000, 14, 13),-- Soda Stereo en Estanislao López
-(26000, 15, 14);-- Los Fabulosos Cadillacs en 15 de Abril
-
 INSERT INTO Specialty (`Name`) VALUES
 ('Paramedic'),
 ('Firemen'),
@@ -2060,4 +2043,21 @@ INSERT INTO Staff (`Name`, `Gender`, `Age`, `Specialty`) VALUES
 ('Julián Duarte', 'M', 46, 3),
 ('Lucas López', 'M', 44, 2);
 
-CALL asign_staff_to_all_concerts();
+INSERT INTO Concert (`Tickets_Sold`, `Band`, `Stadium`) VALUES
+(83714, 1, 1),  -- The Beatles en el Monumental
+(42730, 2, 2),  -- Queen en La Bombonera
+(57000, 3, 5),  -- BTS en Mario Kempes
+(39000, 4, 6),  -- Rammstein en Marcelo Bielsa
+(49800, 5, 9),  -- Metallica en José Amalfitani
+(25000, 6, 10), -- Daft Punk en Diego Maradona
+(34901, 7, 15), -- Café Tacvba en Florencio Sola
+(51000, 8, 4),  -- Coldplay en Presidente Perón
+(46000, 9, 3),  -- Maná en Libertadores de América
+(38000, 10, 7), -- Blackpink en Ciudad de La Plata
+(48314, 11, 11),-- AC/DC en Ducó
+(15000, 12, 12),-- Babymetal en Grondona
+(53000, 13, 8), -- Imagine Dragons en Gigante de Arroyito
+(25000, 14, 13),-- Soda Stereo en Estanislao López
+(26000, 15, 14);-- Los Fabulosos Cadillacs en 15 de Abril
+
+-- CALL asign_staff_to_all_concerts();
