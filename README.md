@@ -289,24 +289,26 @@ Automatically assigns available staff members of a specific specialty to a speci
 ### 📌 `asign_staff_to_all_concerts()`
 
 **Description:**  
-Performs the full assignment of staff for **all specialties** to **all registered concerts** in the database.
+Performs staff assignment for **all specialties** across **all concerts** registered in the database.
 
-**Purpose and Benefits:**  
-- Executes a complete staff assignment for all events in a single operation.
-- Useful for simulations, testing, or initial data loads.
-- Ensures every concert has the minimum required staff by specialty.
+**Purpose and benefits:**  
+- Executes the full staff assignment process for all events in a single step.  
+- Useful for simulations, testing, or initial data loads.  
+- Ensures every concert has at least the minimum required staff per specialty.  
+- **Alternative to the `after_concert_insert` trigger**: this procedure can be used manually if the user prefers not to rely on the automatic trigger when inserting new concerts.
 
 **How it works:**  
-1. Iterates through all concerts using a cursor.
-2. For each concert, calls `assign_specialty_to_concert()` for each specialty (1 through 4).
+1. Iterates through all registered concerts using a cursor.  
+2. For each concert, calls the `assign_specialty_to_concert` procedure for each specialty type (1 to 4).
 
-**Tables involved:**
-- `concert`: to fetch all event IDs.
-- `asignation`: to insert the resulting staff assignments.
-- `staff`: indirectly accessed by the internal procedure.
+**Involved tables:**  
+- `concert`: to iterate through all events.  
+- `asignation`: to insert the resulting staff assignments.  
+- `staff`: accessed indirectly via the internal procedure.
 
-**Procedures used:**
+**Procedures used:**  
 - `assign_specialty_to_concert()`
+
 
 ---
 
