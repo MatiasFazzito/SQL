@@ -188,6 +188,63 @@ CEIL(get_specialty_multiplier(p_specialty) * p_tickets / 200)
 
 ---
 
+## ⚙️ Listado de Stored Procedures
+
+Esta sección documenta los procedimientos almacenados definidos en la base de datos. Estos procedimientos permiten automatizar tareas críticas como la asignación de personal a los conciertos según su especialidad y la cantidad de entradas vendidas, reduciendo la posibilidad de errores y mejorando la eficiencia operativa.
+
+---
+
+### 📌 `assign_specialty_to_concert(p_concert_id INT, p_specialty INT)`
+
+**Descripción:**  
+Asigna automáticamente miembros del staff de una especialidad determinada a un concierto específico, de forma proporcional a la cantidad de entradas vendidas.
+
+**Objetivo y beneficios:**  
+- Automatiza la asignación de personal específico (paramédicos, bomberos, rescatistas, policías).
+- Evita duplicidad en las asignaciones (verifica que el staff no esté previamente asignado al mismo concierto).
+- Se adapta a los requerimientos dinámicos de personal según la demanda (entradas vendidas).
+
+**Funcionamiento:**  
+1. Consulta la cantidad de entradas vendidas (`concert`).
+2. Calcula el número requerido de personal según especialidad (`get_required_staff`).
+3. Utiliza un cursor para recorrer los miembros del staff disponibles de esa especialidad.
+4. Inserta las asignaciones hasta completar el número necesario.
+
+**Tablas involucradas:**
+- `concert`: para obtener las entradas vendidas.
+- `staff`: para seleccionar personal disponible según especialidad.
+- `asignation`: para registrar las asignaciones de staff a conciertos.
+
+**Funciones utilizadas:**
+- `get_required_staff()`
+
+---
+
+### 📌 `asign_staff_to_all_concerts()`
+
+**Descripción:**  
+Realiza la asignación de personal para **todas las especialidades** en **todos los conciertos** registrados en la base de datos.
+
+**Objetivo y beneficios:**  
+- Ejecuta en un solo paso la asignación completa del personal a todos los eventos.  
+- Útil para simulaciones, pruebas o cargas iniciales de datos.  
+- Garantiza que todos los conciertos tengan al menos el personal mínimo requerido por especialidad.  
+- **Alternativa al trigger `after_concert_insert`**: este procedimiento puede utilizarse manualmente si el usuario prefiere no activar el trigger automático al insertar conciertos.
+
+**Funcionamiento:**  
+1. Recorre todos los conciertos registrados mediante un cursor.  
+2. Para cada concierto, llama al procedimiento `assign_specialty_to_concert` para cada tipo de especialidad (1 a 4).
+
+**Tablas involucradas:**  
+- `concert`: para recorrer todos los eventos.  
+- `asignation`: para insertar las asignaciones resultantes.  
+- `staff`: accedida indirectamente por el procedimiento interno.
+
+**Procedimientos utilizados:**  
+- `assign_specialty_to_concert()`
+
+---
+
 ## 🔍 Listado de Vistas Definidas
 
 Esta sección describe las vistas creadas en la base de datos para facilitar el acceso a información compuesta y mejorar la legibilidad de los datos. Las vistas permiten obtener resultados combinando múltiples tablas sin necesidad de escribir consultas complejas cada vez.
@@ -251,63 +308,6 @@ Simplificar la identificación del staff según su especialidad sin necesidad de
 - `Staff_ID`
 - `Staff_Name`
 - `Specialty_Name`
-
----
-
-## ⚙️ Listado de Stored Procedures
-
-Esta sección documenta los procedimientos almacenados definidos en la base de datos. Estos procedimientos permiten automatizar tareas críticas como la asignación de personal a los conciertos según su especialidad y la cantidad de entradas vendidas, reduciendo la posibilidad de errores y mejorando la eficiencia operativa.
-
----
-
-### 📌 `assign_specialty_to_concert(p_concert_id INT, p_specialty INT)`
-
-**Descripción:**  
-Asigna automáticamente miembros del staff de una especialidad determinada a un concierto específico, de forma proporcional a la cantidad de entradas vendidas.
-
-**Objetivo y beneficios:**  
-- Automatiza la asignación de personal específico (paramédicos, bomberos, rescatistas, policías).
-- Evita duplicidad en las asignaciones (verifica que el staff no esté previamente asignado al mismo concierto).
-- Se adapta a los requerimientos dinámicos de personal según la demanda (entradas vendidas).
-
-**Funcionamiento:**  
-1. Consulta la cantidad de entradas vendidas (`concert`).
-2. Calcula el número requerido de personal según especialidad (`get_required_staff`).
-3. Utiliza un cursor para recorrer los miembros del staff disponibles de esa especialidad.
-4. Inserta las asignaciones hasta completar el número necesario.
-
-**Tablas involucradas:**
-- `concert`: para obtener las entradas vendidas.
-- `staff`: para seleccionar personal disponible según especialidad.
-- `asignation`: para registrar las asignaciones de staff a conciertos.
-
-**Funciones utilizadas:**
-- `get_required_staff()`
-
----
-
-### 📌 `asign_staff_to_all_concerts()`
-
-**Descripción:**  
-Realiza la asignación de personal para **todas las especialidades** en **todos los conciertos** registrados en la base de datos.
-
-**Objetivo y beneficios:**  
-- Ejecuta en un solo paso la asignación completa del personal a todos los eventos.  
-- Útil para simulaciones, pruebas o cargas iniciales de datos.  
-- Garantiza que todos los conciertos tengan al menos el personal mínimo requerido por especialidad.  
-- **Alternativa al trigger `after_concert_insert`**: este procedimiento puede utilizarse manualmente si el usuario prefiere no activar el trigger automático al insertar conciertos.
-
-**Funcionamiento:**  
-1. Recorre todos los conciertos registrados mediante un cursor.  
-2. Para cada concierto, llama al procedimiento `assign_specialty_to_concert` para cada tipo de especialidad (1 a 4).
-
-**Tablas involucradas:**  
-- `concert`: para recorrer todos los eventos.  
-- `asignation`: para insertar las asignaciones resultantes.  
-- `staff`: accedida indirectamente por el procedimiento interno.
-
-**Procedimientos utilizados:**  
-- `assign_specialty_to_concert()`
 
 ---
 
