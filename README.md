@@ -188,6 +188,64 @@ CEIL(get_specialty_multiplier(p_specialty) * p_tickets / 200)
 
 ---
 
+## ⚙️ List of Stored Procedures
+
+This section documents the stored procedures defined in the database. These procedures automate key tasks, such as assigning staff to concerts based on their specialty and the number of tickets sold, reducing errors and improving operational efficiency.
+
+---
+
+### 📌 `assign_specialty_to_concert(p_concert_id INT, p_specialty INT)`
+
+**Description:**  
+Automatically assigns available staff members of a specific specialty to a specific concert, proportionally to the number of tickets sold.
+
+**Purpose and Benefits:**  
+- Automates the assignment of specific staff types (paramedics, firefighters, rescuers, police/security).
+- Prevents duplicate assignments (ensures staff is not already assigned to the same concert).
+- Dynamically adjusts the number of assigned staff according to demand (based on tickets sold).
+
+**How it works:**  
+1. Retrieves the number of tickets sold from the `concert` table.
+2. Calculates the required number of staff using the `get_required_staff()` function.
+3. Uses a cursor to iterate through the available staff members of the given specialty.
+4. Inserts the required number of assignments into the `asignation` table.
+
+**Tables involved:**
+- `concert`: to get the number of tickets sold.
+- `staff`: to select available staff by specialty.
+- `asignation`: to store staff-to-concert assignments.
+
+**Functions used:**
+- `get_required_staff()`
+
+---
+
+### 📌 `asign_staff_to_all_concerts()`
+
+**Description:**  
+Performs staff assignment for **all specialties** across **all concerts** registered in the database.
+
+**Purpose and benefits:**  
+- Executes the full staff assignment process for all events in a single step.  
+- Useful for simulations, testing, or initial data loads.  
+- Ensures every concert has at least the minimum required staff per specialty.  
+- **Alternative to the `after_concert_insert` trigger**: this procedure can be used manually if the user prefers not to rely on the automatic trigger when inserting new concerts.
+
+**How it works:**  
+1. Iterates through all registered concerts using a cursor.  
+2. For each concert, calls the `assign_specialty_to_concert` procedure for each specialty type (1 to 4).
+
+**Involved tables:**  
+- `concert`: to iterate through all events.  
+- `asignation`: to insert the resulting staff assignments.  
+- `staff`: accessed indirectly via the internal procedure.
+
+**Procedures used:**  
+- `assign_specialty_to_concert()`
+
+---
+
+
 ## 🔍 List of Views
 
 This section documents the views created in the database to simplify complex queries by joining multiple tables. These views allow users to access meaningful insights without having to manually join tables each time.
@@ -251,64 +309,6 @@ Simplifies filtering and identification of staff based on their specialty.
 - `Staff_ID`
 - `Staff_Name`
 - `Specialty_Name`
-
----
-
-## ⚙️ List of Stored Procedures
-
-This section documents the stored procedures defined in the database. These procedures automate key tasks, such as assigning staff to concerts based on their specialty and the number of tickets sold, reducing errors and improving operational efficiency.
-
----
-
-### 📌 `assign_specialty_to_concert(p_concert_id INT, p_specialty INT)`
-
-**Description:**  
-Automatically assigns available staff members of a specific specialty to a specific concert, proportionally to the number of tickets sold.
-
-**Purpose and Benefits:**  
-- Automates the assignment of specific staff types (paramedics, firefighters, rescuers, police/security).
-- Prevents duplicate assignments (ensures staff is not already assigned to the same concert).
-- Dynamically adjusts the number of assigned staff according to demand (based on tickets sold).
-
-**How it works:**  
-1. Retrieves the number of tickets sold from the `concert` table.
-2. Calculates the required number of staff using the `get_required_staff()` function.
-3. Uses a cursor to iterate through the available staff members of the given specialty.
-4. Inserts the required number of assignments into the `asignation` table.
-
-**Tables involved:**
-- `concert`: to get the number of tickets sold.
-- `staff`: to select available staff by specialty.
-- `asignation`: to store staff-to-concert assignments.
-
-**Functions used:**
-- `get_required_staff()`
-
----
-
-### 📌 `asign_staff_to_all_concerts()`
-
-**Description:**  
-Performs staff assignment for **all specialties** across **all concerts** registered in the database.
-
-**Purpose and benefits:**  
-- Executes the full staff assignment process for all events in a single step.  
-- Useful for simulations, testing, or initial data loads.  
-- Ensures every concert has at least the minimum required staff per specialty.  
-- **Alternative to the `after_concert_insert` trigger**: this procedure can be used manually if the user prefers not to rely on the automatic trigger when inserting new concerts.
-
-**How it works:**  
-1. Iterates through all registered concerts using a cursor.  
-2. For each concert, calls the `assign_specialty_to_concert` procedure for each specialty type (1 to 4).
-
-**Involved tables:**  
-- `concert`: to iterate through all events.  
-- `asignation`: to insert the resulting staff assignments.  
-- `staff`: accessed indirectly via the internal procedure.
-
-**Procedures used:**  
-- `assign_specialty_to_concert()`
-
 
 ---
 
