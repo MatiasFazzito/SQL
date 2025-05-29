@@ -101,6 +101,23 @@ Asigna miembros del staff a conciertos específicos.
 
 ---
 
+### 7. `Audit_Log`
+
+Diseñada para almacenar un registro detallado de los cambios realizados sobre otras tablas dentro de la base de datos. Sirve como mecanismo de auditoría para rastrear acciones de inserción, actualización o eliminación de datos, permitiendo mantener un historial de modificaciones y garantizar la trazabilidad de la información.
+
+| Campo       | Tipo                             | Descripción                                                                 |
+|-------------|----------------------------------|-----------------------------------------------------------------------------|
+| ID          | `INT` (PK, AUTO_INCREMENT)       | Identificador único de la entrada en el log                                |
+| Table_Name  | `VARCHAR(64)`                    | Nombre de la tabla sobre la cual se realizó la acción                      |
+| Action_Type | `ENUM('INSERT', 'UPDATE', 'DELETE')` | Tipo de acción registrada (INSERT, UPDATE o DELETE)                    |
+| Action_Time | `TIMESTAMP` (DEFAULT CURRENT_TIMESTAMP) | Fecha y hora en que se ejecutó la acción                              |
+| Old_Data    | `JSON`                           | Datos previos a la modificación (solo UPDATE y DELETE)                     |
+| New_Data    | `JSON`                           | Datos nuevos resultantes de la acción (solo INSERT y UPDATE)              |
+
+📌 *Esta tabla está diseñada para registrar automáticamente los cambios en otras tablas mediante triggers personalizados, permitiendo realizar auditorías completas del sistema.*
+
+---
+
 ## ⚡ Trigger Definido
 
 Esta sección documenta el trigger creado en la base de datos, explicando su propósito, cómo funciona y qué procedimientos invoca automáticamente.
