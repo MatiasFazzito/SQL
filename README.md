@@ -101,6 +101,23 @@ Assigns staff members to specific concerts.
 
 ---
 
+### 7. `Audit_Log`
+
+Stores a history of actions performed on other tables for auditing purposes.
+
+| Field        | Type                                 | Description                                                                 |
+|--------------|--------------------------------------|-----------------------------------------------------------------------------|
+| ID           | `INT` (PK, AUTO_INCREMENT)           | Unique identifier for the log entry                                        |
+| Table_Name   | `VARCHAR(64)`                        | Name of the table where the action took place                              |
+| Action_Type  | `ENUM('INSERT', 'UPDATE', 'DELETE')` | Type of action recorded (INSERT, UPDATE, or DELETE)                        |
+| Action_Time  | `TIMESTAMP` (DEFAULT CURRENT_TIMESTAMP) | Date and time when the action occurred                                 |
+| Old_Data     | `JSON`                               | Data before the change (only for UPDATE and DELETE actions)                |
+| New_Data     | `JSON`                               | Data after the change (only for INSERT and UPDATE actions)                 |
+
+📌 *This table is designed to automatically log changes made to other tables via custom triggers, enabling full system auditability.*
+
+---
+
 ## ⚡ Defined Trigger
 
 This section documents the trigger created in the database, explaining its purpose, functionality, and which procedures it automatically invokes.
