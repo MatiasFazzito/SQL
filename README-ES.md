@@ -103,7 +103,7 @@ Asigna miembros del staff a conciertos específicos.
 
 ### 7. `Audit_Log`
 
-Diseñada para almacenar un registro detallado de los cambios realizados sobre otras tablas dentro de la base de datos. Sirve como mecanismo de auditoría para rastrear acciones de inserción, actualización o eliminación de datos, permitiendo mantener un historial de modificaciones y garantizar la trazabilidad de la información.
+Almacena un historial de acciones realizadas sobre otras tablas para fines de auditoría.
 
 | Campo       | Tipo                             | Descripción                                                                 |
 |-------------|----------------------------------|-----------------------------------------------------------------------------|
