@@ -160,6 +160,187 @@ DELIMITER ;
 
 ---
 
+### 🔔 Triggers de Auditoría para la Tabla `bands`
+
+**Descripción:**  
+Estos tres triggers se ejecutan automáticamente después de operaciones de inserción, actualización y eliminación en la tabla `bands`. Registran los cambios realizados en los registros de bandas en la tabla `audit_log`, capturando los datos relevantes antes y/o después de las modificaciones para mantener un historial de auditoría.
+
+**Objetivo:**  
+Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `bands` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un registro histórico de los cambios en la información de las bandas.
+
+**Código del trigger:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER bands_after_insert
+AFTER INSERT ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('bands', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name));
+END$$
+
+CREATE TRIGGER bands_after_update
+AFTER UPDATE ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('bands', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name));
+END$$
+
+CREATE TRIGGER bands_after_delete
+AFTER DELETE ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('bands', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Triggers de Auditoría para la Tabla `stadium`
+
+**Descripción:**  
+Estos tres triggers se ejecutan automáticamente después de operaciones de inserción, actualización y eliminación en la tabla `stadium`. Registran los cambios realizados en los registros de estadios en la tabla `audit_log`, capturando los datos relevantes antes y/o después de las modificaciones para mantener un historial de auditoría.
+
+**Objetivo:**  
+Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `stadium` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un registro histórico de los cambios en la información de los estadios.
+
+**Código del trigger:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER stadium_after_insert
+AFTER INSERT ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('stadium', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
+END$$
+
+CREATE TRIGGER stadium_after_update
+AFTER UPDATE ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('stadium', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
+END$$
+
+CREATE TRIGGER stadium_after_delete
+AFTER DELETE ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('stadium', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Triggers de Auditoría para la tabla `concert`
+
+**Descripción:**  
+Estos tres triggers se ejecutan automáticamente después de operaciones de inserción, actualización y eliminación en la tabla `concert`. Registran los cambios realizados en los registros de conciertos en la tabla `audit_log`, capturando los datos relevantes antes y/o después de las modificaciones para mantener un historial de auditoría.
+
+**Objetivo:**  
+Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `concert` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un historial de los cambios en la información de los conciertos.
+
+**Código de los triggers:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER concert_after_insert
+AFTER INSERT ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('concert', 'INSERT', JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
+END$$
+
+CREATE TRIGGER concert_after_update
+AFTER UPDATE ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('concert', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold),
+          JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
+END$$
+
+CREATE TRIGGER concert_after_delete
+AFTER DELETE ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('concert', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Triggers de Auditoría para la tabla `staff`
+
+**Descripción:**  
+Estos tres triggers se ejecutan automáticamente después de operaciones de inserción, actualización y eliminación en la tabla `staff`. Registran los cambios realizados en los registros del personal en la tabla `audit_log`, capturando los datos relevantes antes y/o después de las modificaciones para mantener un historial completo de auditoría.
+
+**Objetivo:**  
+Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `staff` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto facilita el monitoreo de la integridad de los datos y proporciona un registro histórico de los cambios en la información del personal.
+
+**Código de los triggers:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER staff_after_insert
+AFTER INSERT ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('staff', 'INSERT',
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
+END$$
+
+CREATE TRIGGER staff_after_update
+AFTER UPDATE ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('staff', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
+END$$
+
+CREATE TRIGGER staff_after_delete
+AFTER DELETE ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('staff', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty));
+END$$
+
+DELIMITER ;
+```
+
+---
+
 ## 🧠 Funciones Definidas en la Base de Datos
 
 Esta sección detalla las funciones creadas en la base de datos, su propósito y cómo interactúan con los datos existentes. Estas funciones están diseñadas para automatizar el cálculo del personal requerido según la especialidad y la cantidad de entradas vendidas.
