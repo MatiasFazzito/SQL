@@ -160,6 +160,187 @@ DELIMITER ;
 
 ---
 
+### 🔔 Audit Triggers for `bands` Table
+
+**Description:**  
+These three triggers are automatically executed after insert, update, and delete operations on the `bands` table. They record the changes made to the band records in the `audit_log` table, capturing the relevant data before and/or after the changes to maintain an audit trail.
+
+**Purpose:**  
+To ensure traceability and auditing of all modifications to the `bands` table by logging inserts, updates, and deletions. This helps monitor data integrity and provides historical records of band information changes.
+
+**Trigger code:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER bands_after_insert
+AFTER INSERT ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('bands', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name));
+END$$
+
+CREATE TRIGGER bands_after_update
+AFTER UPDATE ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('bands', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name));
+END$$
+
+CREATE TRIGGER bands_after_delete
+AFTER DELETE ON bands
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('bands', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Audit Triggers for the `stadium` Table
+
+**Description:**  
+These three triggers are automatically executed after insert, update, and delete operations on the `stadium` table. They record the changes made to the stadium records in the `audit_log` table, capturing the relevant data before and/or after the changes to maintain an audit trail.
+
+**Purpose:**  
+To ensure traceability and auditing of all modifications to the `stadium` table by logging inserts, updates, and deletions. This helps monitor data integrity and provides historical records of stadium information changes.
+
+**Trigger code:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER stadium_after_insert
+AFTER INSERT ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('stadium', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
+END$$
+
+CREATE TRIGGER stadium_after_update
+AFTER UPDATE ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('stadium', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
+END$$
+
+CREATE TRIGGER stadium_after_delete
+AFTER DELETE ON stadium
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('stadium', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Audit Triggers for the `concert` Table
+
+**Description:**  
+These three triggers are automatically executed after insert, update, and delete operations on the `concert` table. They record the changes made to the concert records in the `audit_log` table, capturing the relevant data before and/or after the changes to maintain an audit trail.
+
+**Purpose:**  
+To ensure traceability and auditing of all modifications to the `concert` table by logging inserts, updates, and deletions. This helps monitor data integrity and provides historical records of concert information changes.
+
+**Trigger code:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER concert_after_insert
+AFTER INSERT ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('concert', 'INSERT', JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
+END$$
+
+CREATE TRIGGER concert_after_update
+AFTER UPDATE ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('concert', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold),
+          JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
+END$$
+
+CREATE TRIGGER concert_after_delete
+AFTER DELETE ON concert
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('concert', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold));
+END$$
+
+DELIMITER ;
+```
+
+---
+
+### 🔔 Audit Triggers for the `staff` Table
+
+**Description:**  
+These three triggers are automatically executed after insert, update, and delete operations on the `staff` table. They log changes made to staff records into the `audit_log` table, capturing relevant data before and/or after the changes to maintain a comprehensive audit trail.
+
+**Purpose:**  
+To ensure traceability and auditing of all modifications to the `staff` table by logging insertions, updates, and deletions. This facilitates monitoring data integrity and provides a historical record of changes in staff information.
+
+**Trigger code:**
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER staff_after_insert
+AFTER INSERT ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, new_data)
+  VALUES ('staff', 'INSERT',
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
+END$$
+
+CREATE TRIGGER staff_after_update
+AFTER UPDATE ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
+  VALUES ('staff', 'UPDATE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty),
+          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
+END$$
+
+CREATE TRIGGER staff_after_delete
+AFTER DELETE ON staff
+FOR EACH ROW
+BEGIN
+  INSERT INTO audit_log (table_name, action_type, old_data)
+  VALUES ('staff', 'DELETE',
+          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty));
+END$$
+
+DELIMITER ;
+```
+
+---
+
 ## 🧠 Defined Functions in the Database
 
 This section details the functions created in the database, their purpose, and how they interact with existing data. These functions are designed to automate the calculation of the required staff based on specialty and the number of tickets sold.
