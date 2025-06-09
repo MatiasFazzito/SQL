@@ -12,7 +12,7 @@
   - [5. `Concert`](#5-concert)
   - [6. `Asignation`](#6-asignation)
   - [7. `Audit_Log`](#7-audit_log)
-- [⚡ Defined Triggers](#-defined-trigger)
+- [⚡ Defined Triggers](#-defined-triggers)
   - [`after_concert_insert`](#-after_concert_insert)
   - [Audit Triggers for `bands` Table](#-audit-triggers-for-bands-table)
   - [Audit Triggers for `stadium` Table](#-audit-triggers-for-the-stadium-table)
