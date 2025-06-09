@@ -140,24 +140,6 @@ Al agregarse un nuevo concierto, este trigger llama automáticamente al procedim
 - `3`: Rescatista
 - `4`: Policía/Seguridad
 
-**Código del Trigger:**
-
-```sql
-DELIMITER $$
-
-CREATE TRIGGER after_concert_insert
-AFTER INSERT ON concert
-FOR EACH ROW
-BEGIN
-    CALL assign_specialty_to_concert(NEW.ID, 1); -- Paramedic
-    CALL assign_specialty_to_concert(NEW.ID, 2); -- Firefighter
-    CALL assign_specialty_to_concert(NEW.ID, 3); -- Rescuer
-    CALL assign_specialty_to_concert(NEW.ID, 4); -- Police/Security
-END$$
-
-DELIMITER ;
-```
-
 ---
 
 ### 🔔 Triggers de Auditoría para la Tabla `bands`
@@ -167,41 +149,6 @@ Estos tres triggers se ejecutan automáticamente después de operaciones de inse
 
 **Objetivo:**  
 Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `bands` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un registro histórico de los cambios en la información de las bandas.
-
-**Código del trigger:**
-
-```sql
-DELIMITER $$
-
-CREATE TRIGGER bands_after_insert
-AFTER INSERT ON bands
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, new_data)
-  VALUES ('bands', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name));
-END$$
-
-CREATE TRIGGER bands_after_update
-AFTER UPDATE ON bands
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
-  VALUES ('bands', 'UPDATE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name),
-          JSON_OBJECT('id', NEW.id, 'name', NEW.name));
-END$$
-
-CREATE TRIGGER bands_after_delete
-AFTER DELETE ON bands
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data)
-  VALUES ('bands', 'DELETE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name));
-END$$
-
-DELIMITER ;
-```
 
 ---
 
@@ -213,41 +160,6 @@ Estos tres triggers se ejecutan automáticamente después de operaciones de inse
 **Objetivo:**  
 Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `stadium` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un registro histórico de los cambios en la información de los estadios.
 
-**Código del trigger:**
-
-```sql
-DELIMITER $$
-
-CREATE TRIGGER stadium_after_insert
-AFTER INSERT ON stadium
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, new_data)
-  VALUES ('stadium', 'INSERT', JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
-END$$
-
-CREATE TRIGGER stadium_after_update
-AFTER UPDATE ON stadium
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
-  VALUES ('stadium', 'UPDATE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity),
-          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'capacity', NEW.capacity));
-END$$
-
-CREATE TRIGGER stadium_after_delete
-AFTER DELETE ON stadium
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data)
-  VALUES ('stadium', 'DELETE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'capacity', OLD.capacity));
-END$$
-
-DELIMITER ;
-```
-
 ---
 
 ### 🔔 Triggers de Auditoría para la tabla `concert`
@@ -258,41 +170,6 @@ Estos tres triggers se ejecutan automáticamente después de operaciones de inse
 **Objetivo:**  
 Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `concert` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto ayuda a monitorear la integridad de los datos y proporciona un historial de los cambios en la información de los conciertos.
 
-**Código de los triggers:**
-
-```sql
-DELIMITER $$
-
-CREATE TRIGGER concert_after_insert
-AFTER INSERT ON concert
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, new_data)
-  VALUES ('concert', 'INSERT', JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
-END$$
-
-CREATE TRIGGER concert_after_update
-AFTER UPDATE ON concert
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
-  VALUES ('concert', 'UPDATE',
-          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold),
-          JSON_OBJECT('id', NEW.id, 'band', NEW.band, 'stadium', NEW.stadium, 'tickets_sold', NEW.tickets_sold));
-END$$
-
-CREATE TRIGGER concert_after_delete
-AFTER DELETE ON concert
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data)
-  VALUES ('concert', 'DELETE',
-          JSON_OBJECT('id', OLD.id, 'band', OLD.band, 'stadium', OLD.stadium, 'tickets_sold', OLD.tickets_sold));
-END$$
-
-DELIMITER ;
-```
-
 ---
 
 ### 🔔 Triggers de Auditoría para la tabla `staff`
@@ -302,42 +179,6 @@ Estos tres triggers se ejecutan automáticamente después de operaciones de inse
 
 **Objetivo:**  
 Garantizar la trazabilidad y auditoría de todas las modificaciones en la tabla `staff` mediante el registro de inserciones, actualizaciones y eliminaciones. Esto facilita el monitoreo de la integridad de los datos y proporciona un registro histórico de los cambios en la información del personal.
-
-**Código de los triggers:**
-
-```sql
-DELIMITER $$
-
-CREATE TRIGGER staff_after_insert
-AFTER INSERT ON staff
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, new_data)
-  VALUES ('staff', 'INSERT',
-          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
-END$$
-
-CREATE TRIGGER staff_after_update
-AFTER UPDATE ON staff
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data, new_data)
-  VALUES ('staff', 'UPDATE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty),
-          JSON_OBJECT('id', NEW.id, 'name', NEW.name, 'gender', NEW.gender, 'age', NEW.age, 'specialty', NEW.specialty));
-END$$
-
-CREATE TRIGGER staff_after_delete
-AFTER DELETE ON staff
-FOR EACH ROW
-BEGIN
-  INSERT INTO audit_log (table_name, action_type, old_data)
-  VALUES ('staff', 'DELETE',
-          JSON_OBJECT('id', OLD.id, 'name', OLD.name, 'gender', OLD.gender, 'age', OLD.age, 'specialty', OLD.specialty));
-END$$
-
-DELIMITER ;
-```
 
 ---
 
@@ -377,12 +218,6 @@ Calcula la cantidad total de personal requerido para una especialidad dada, basa
 
 **Objetivo:**  
 Determinar cuántos miembros del staff se necesitan de una especialidad específica para un evento determinado, aplicando las reglas proporcionales (por cada 200 tickets vendidos).
-
-**Fórmula utilizada:**
-
-```sql
-CEIL(get_specialty_multiplier(p_specialty) * p_tickets / 200)
-```
 
 ---
 
