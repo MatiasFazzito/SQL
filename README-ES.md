@@ -1,5 +1,40 @@
 # 🎶 Base de Datos para Control Logístico de Conciertos y Eventos
 
+---
+
+## 📚 Índice
+
+- [🎶 Introducción](#-base-de-datos-para-control-logístico-de-conciertos-y-eventos)
+- [📊 Requisitos de Seguridad Base](#-requisitos-de-seguridad-base-ejemplo-argentina)
+- [🧩 Descripción de Tablas](#-descripción-de-tablas)
+  - [`Bands`](#1-bands)
+  - [`Stadium`](#2-stadium)
+  - [`Staff`](#3-staff)
+  - [`Specialty`](#4-specialty)
+  - [`Concert`](#5-concert)
+  - [`Asignation`](#6-asignation)
+  - [`Audit_Log`](#7-audit_log)
+- [⚡ Trigger Definido](#-trigger-definido)
+  - [`after_concert_insert`](#-after_concert_insert)
+  - [Triggers de Auditoría `bands`](#-triggers-de-auditoría-para-la-tabla-bands)
+  - [Triggers de Auditoría `stadium`](#-triggers-de-auditoría-para-la-tabla-stadium)
+  - [Triggers de Auditoría `concert`](#-triggers-de-auditoría-para-la-tabla-concert)
+  - [Triggers de Auditoría `staff`](#-triggers-de-auditoría-para-la-tabla-staff)
+- [🧠 Funciones Definidas en la Base de Datos](#-funciones-definidas-en-la-base-de-datos)
+  - [`get_specialty_multiplier()`](#-get_specialty_multiplierp_specialty-int)
+  - [`get_required_staff()`](#-get_required_staffp_tickets-int-p_specialty-int)
+- [⚙️ Stored Procedures](#-listado-de-stored-procedures)
+  - [`assign_specialty_to_concert()`](#-assign_specialty_to_concertp_concert_id-int-p_specialty-int)
+  - [`asign_staff_to_all_concerts()`](#-asign_staff_to_all_concerts)
+- [🔍 Vistas Definidas](#-listado-de-vistas-definidas)
+  - [`asignation_details`](#-asignation_details)
+  - [`concert_details`](#-concert_details)
+  - [`staff_details`](#-staff_details)
+- [🧩 Adaptabilidad Futura](#-adaptabilidad-futura)
+- [📁 Casos de Uso](#-casos-de-uso)
+
+---
+
 Esta base de datos está diseñada para un **software de control logístico** de conciertos y eventos. Permite el seguimiento de:
 
 - Las **bandas/artistas** que se presentarán en cada evento  
