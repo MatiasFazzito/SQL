@@ -1,3 +1,40 @@
+# 🎶 ConcertIO
+
+## 📚 Table of Contents
+
+- [🎶 Introduction](#-logistics-control-database-for-concerts-and-events)
+- [📊 Base Safety Requirements (Argentina Example)](#-base-safety-requirements-argentina-example)
+- [🧩 Tables Overview](#-tables-overview)
+  - [1. `Bands`](#1-bands)
+  - [2. `Stadium`](#2-stadium)
+  - [3. `Staff`](#3-staff)
+  - [4. `Specialty`](#4-specialty)
+  - [5. `Concert`](#5-concert)
+  - [6. `Asignation`](#6-asignation)
+  - [7. `Audit_Log`](#7-audit_log)
+- [⚡ Defined Triggers](#-defined-trigger)
+  - [`after_concert_insert`](#-after_concert_insert)
+  - [Audit Triggers for `bands` Table](#-audit-triggers-for-bands-table)
+  - [Audit Triggers for `stadium` Table](#-audit-triggers-for-the-stadium-table)
+  - [Audit Triggers for `concert` Table](#-audit-triggers-for-the-concert-table)
+  - [Audit Triggers for `staff` Table](#-audit-triggers-for-the-staff-table)
+- [🧠 Defined Functions in the Database](#-defined-functions-in-the-database)
+  - [`get_specialty_multiplier`](#-get_specialty_multiplierpspecialty-int)
+  - [`get_required_staff`](#-get_required_staffptickets-int-pspecialty-int)
+- [⚙️ List of Stored Procedures](#️-list-of-stored-procedures)
+  - [`assign_specialty_to_concert`](#-assign_specialty_to_concertp_concert_id-int-p_specialty-int)
+  - [`asign_staff_to_all_concerts`](#-asign_staff_to_all_concerts)
+- [🔍 List of Views](#-list-of-views)
+  - [`asignation_details`](#-asignation_details)
+  - [`concert_details`](#-concert_details)
+  - [`staff_details`](#-staff_details)
+- [🧩 Future Adaptability](#-future-adaptability)
+- [📁 Use Cases](#-use-cases)
+
+
+
+---
+
 # 🎶 Logistics Control Database for Concerts and Events
 
 This database is designed for a **logistics control software** for concerts and events. It allows tracking of:
@@ -118,7 +155,7 @@ Stores a history of actions performed on other tables for auditing purposes.
 
 ---
 
-## ⚡ Defined Trigger
+## ⚡ Defined Triggers
 
 This section documents the trigger created in the database, explaining its purpose, functionality, and which procedures it automatically invokes.
 
