@@ -1,6 +1,4 @@
-# 🎶 Base de Datos para Control Logístico de Conciertos y Eventos
-
----
+# 🎶 ConcertIO
 
 ## 📚 Índice
 
@@ -34,6 +32,8 @@
 - [📁 Casos de Uso](#-casos-de-uso)
 
 ---
+
+# 🎶 Base de Datos para Control Logístico de Conciertos y Eventos
 
 Esta base de datos está diseñada para un **software de control logístico** de conciertos y eventos. Permite el seguimiento de:
 
