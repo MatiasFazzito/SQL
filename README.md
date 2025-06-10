@@ -61,45 +61,49 @@ For **music events**, the following minimum staffing requirements are establishe
 
 ## 🧪 Steps to Run the Database
 
-Below are the necessary steps to properly implement this database in a local or development environment:
+Below are the necessary steps to properly set up and run this database in a local or development environment:
 
 1. **Create the database**  
-   - Run the database creation script (Link to the SQL file that contains the creation). This file includes the creation of the tables with their respective foreign keys and triggers.
+   - Run the database creation script. [This file](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql) contains the creation of the tables with their corresponding relational keys and triggers.
 
 2. **Select the database to use**  
-   - Within the file (Link to the SQL file that contains the creation), use the command `USE concertio;`.
+   - Within the same [file](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql), execute the `USE concertio;` command.
 
 3. **Create all tables**  
-   - Within the file (Link to the SQL file that contains the creation), execute the SQL script that defines the tables (`bands`, `stadium`, `staff`, etc.).
+   - In the same [file](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql), run the script that defines all the tables (`bands`, `stadium`, `staff`, etc.).
 
 4. **Create the triggers**  
-   - Within the file (Link to the SQL file that contains the creation), run the part of the script that creates the necessary triggers (`after_concert_insert`, and the audit triggers for `bands`, `stadium`, `concert`, `staff`).
+   - In the same [file](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql), run the portion of the script that creates the necessary triggers (`after_concert_insert`, and audit triggers for `bands`, `stadium`, `concert`, `staff`).
+
+> 💡 **Pro Tip:** These first steps can be executed all at once by running the entire initial script file, which will leave the database mostly ready.
 
 5. **Create views**  
-   - Run the scripts that generate the views (Link to the view creation folder) by right-clicking on the `Views` section of the schema (`asignation_details`, `concert_details`, `staff_details`).
+   - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Views), run each script individually to generate the views by right-clicking on the `Views` section of the schema (`asignation_details`, `concert_details`, `staff_details`).
 
 6. **Create functions**  
-   - Run the scripts that define the functions (Link to the function creation folder) (`get_required_staff`, `get_specialty_multiplier`).
+   - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Functions), run each script individually to define the functions (`get_required_staff`, `get_specialty_multiplier`).
 
 7. **Create stored procedures**  
-   - Run the scripts that define the procedures (Link to the function creation folder) (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
+   - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Procedures), run each script individually to define the procedures (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
 
 8. **Insert initial data**  
-   - Load test data by executing the following script (Link to the data insertion script folder) or load real data into the main tables (`bands`, `stadium`, `specialty`, `staff`, etc.).
+   - Load test data using this [script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20insertion/Mock_Data_Stress_Insertion.sql), or insert real data into the main tables (`bands`, `stadium`, `specialty`, `staff`, etc.).
+
+> 💡 **Tip:** Make sure to run the scripts in the correct order during this step to avoid foreign key or cross-reference errors. It is recommended to follow the order specified in the provided test data file.
 
 9. **Verify functionality**  
-   - Insert a new concert and check if staff is automatically assigned.  
-   - Check whether the audit triggers are recording the changes.
+   - Insert a new concert and check whether the staff is assigned automatically.  
+   - Verify that the audit triggers are recording the changes.
 
 10. **Adjust parameters if necessary**  
    - Modify multipliers or assignment rules depending on the country or type of event.
 
-11. **(Optional) Load more data or perform tests**  
-   - Use the procedures and views to run functional tests.
+11. **(Optional) Load more data or run additional tests**  
+   - Use the procedures and views to perform functional tests.
 
 ---
 
-> 💡 **Tip:** Make sure to execute the scripts in the correct order to avoid cross-reference or foreign key errors.
+> 💡 **Tip:** Make sure to execute the scripts in the correct order to avoid foreign key or cross-reference errors.
 
 ---
 
