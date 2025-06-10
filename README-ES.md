@@ -62,28 +62,32 @@ Para eventos **musicales**, se establece el siguiente mínimo obligatorio de per
 A continuación se detallan los pasos necesarios para implementar correctamente esta base de datos en un entorno local o de desarrollo:
 
 1. **Crear la base de datos**  
-   - Ejecutar el script de creación de la base de datos (Link al archivo SQL que contiene la creacion) este archivo contiene la creacion de las tablas con sus respectivas claves relacionales y triggers.
+   - Ejecutar el script de creación de la base de datos [este archivo](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql) contiene la creacion de las tablas con sus respectivas claves relacionales y triggers.
 
 2. **Seleccionar la base de datos a utilizar**  
-   - Dentro del archivo (Link al archivo SQL que contiene la creacion) utilizar el comando `USE concertio ;`.
+   - Dentro del [archivo](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql) ejecutar el comando `USE concertio ;`.
 
 3. **Crear todas las tablas**  
-   - Dentro del archivo (Link al archivo SQL que contiene la creacion) ejecutar el script SQL que contiene las definiciones de las tablas (`bands`, `stadium`, `staff`, etc.).
+   - Dentro del [archivo](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql) ejecutar el script que contiene las definiciones de las tablas (`bands`, `stadium`, `staff`, etc.).
 
 4. **Crear los triggers**  
-   - Dentro del archivo (Link al archivo SQL que contiene la creacion) ejecutar la porcion del script que crea los triggers necesarios (`after_concert_insert`, y los de auditoría para `bands`, `stadium`, `concert`, `staff`).
+   - Dentro del [archivo](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql) ejecutar la porcion del script que crea los triggers necesarios (`after_concert_insert`, y los de auditoría para `bands`, `stadium`, `concert`, `staff`).
+  
+> 💡 **Pro Tip:** Estos primeros pasos pueden hacerse automaticamente si eecutas todo el bloque definido en el archivo inicial dejando la base de datos lista en su mayoria.
   
 5. **Crear vistas**  
-   - Ejecutar los scripts que generan las vistas (Link a la carpeta de creacion de vistas) haciendo click derecho en el apartado `Views` del schema (`asignation_details`, `concert_details`, `staff_details`).
+   - Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Views) ejecutar uno por uno los scripts que generan las vistas haciendo click derecho en el apartado `Views` del schema (`asignation_details`, `concert_details`, `staff_details`).
 
 6. **Crear funciones**  
-   - Ejecutar los scripts que definen las funciones (Link a la carpeta de creacion de funciones) (`get_required_staff`, `get_specialty_multiplier`).
+   - Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Functions) Ejecutar uno por uno los scripts que definen las funciones (`get_required_staff`, `get_specialty_multiplier`).
   
 7. **Crear los procedimientos almacenados**  
-   - Ejecutar los scripts que definen los procedimientos (Link a la carpeta de creacion de funciones) (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
+   -  Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Procedures) Ejecutar uno por uno los scripts que definen los procedimientos (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
 
 8. **Insertar datos iniciales**  
-   - Cargar datos de prueba ejecutando el siguiente script (Link a la carpeta con el script de insercion de datos) o datos reales en las tablas principales (`bands`, `stadium`, `specialty`, `staff`, etc.).
+   - Cargar datos de prueba ejecutando el siguiente [script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20insertion/Mock_Data_Stress_Insertion.sql) o datos reales en las tablas principales (`bands`, `stadium`, `specialty`, `staff`, etc.).
+   - 
+> 💡 **Sugerencia:** Asegurate de ejecutar los scripts en el orden correcto en este paso para evitar errores de referencias cruzadas o claves foráneas, se recomienda seguir el orden detallado en el archivo de prueba provisto.
 
 9. **Verificar el funcionamiento**  
    - Insertar un concierto nuevo y comprobar si se asigna el staff automáticamente.  
