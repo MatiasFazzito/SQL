@@ -4,7 +4,7 @@
 
 - [🎶 Introduction](#-logistics-control-database-for-concerts-and-events)
 - [📊 Base Safety Requirements (Argentina Example)](#-base-safety-requirements-argentina-example)
-- [🧪 Steps to Run the Database](#steps-to-run-the-database)
+- [🧪 Steps to Run the Database](#-steps-to-run-the-database)
 - [🧩 Tables Overview](#-tables-overview)
   - [1. `Bands`](#1-bands)
   - [2. `Stadium`](#2-stadium)
