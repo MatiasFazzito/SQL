@@ -4,6 +4,7 @@
 
 - [🎶 Introduction](#-logistics-control-database-for-concerts-and-events)
 - [📊 Base Safety Requirements (Argentina Example)](#-base-safety-requirements-argentina-example)
+- [🧪 Steps to Run the Database](#steps-to-run-the-database)
 - [🧩 Tables Overview](#-tables-overview)
   - [1. `Bands`](#1-bands)
   - [2. `Stadium`](#2-stadium)
@@ -55,6 +56,50 @@ For **music events**, the following minimum staffing requirements are establishe
 
 - 👩‍⚕️ 1 Paramedic and 👨‍🚒 1 Firefighter per **200 attendees**
 - 🧗‍♂️ 3 Rescue Workers and 👮‍♂️ 3 Police/Security Personnel per **200 attendees**
+
+---
+
+## 🧪 Steps to Run the Database
+
+Below are the necessary steps to properly implement this database in a local or development environment:
+
+1. **Create the database**  
+   - Run the database creation script (Link to the SQL file that contains the creation). This file includes the creation of the tables with their respective foreign keys and triggers.
+
+2. **Select the database to use**  
+   - Within the file (Link to the SQL file that contains the creation), use the command `USE concertio;`.
+
+3. **Create all tables**  
+   - Within the file (Link to the SQL file that contains the creation), execute the SQL script that defines the tables (`bands`, `stadium`, `staff`, etc.).
+
+4. **Create the triggers**  
+   - Within the file (Link to the SQL file that contains the creation), run the part of the script that creates the necessary triggers (`after_concert_insert`, and the audit triggers for `bands`, `stadium`, `concert`, `staff`).
+
+5. **Create views**  
+   - Run the scripts that generate the views (Link to the view creation folder) by right-clicking on the `Views` section of the schema (`asignation_details`, `concert_details`, `staff_details`).
+
+6. **Create functions**  
+   - Run the scripts that define the functions (Link to the function creation folder) (`get_required_staff`, `get_specialty_multiplier`).
+
+7. **Create stored procedures**  
+   - Run the scripts that define the procedures (Link to the function creation folder) (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
+
+8. **Insert initial data**  
+   - Load test data by executing the following script (Link to the data insertion script folder) or load real data into the main tables (`bands`, `stadium`, `specialty`, `staff`, etc.).
+
+9. **Verify functionality**  
+   - Insert a new concert and check if staff is automatically assigned.  
+   - Check whether the audit triggers are recording the changes.
+
+10. **Adjust parameters if necessary**  
+   - Modify multipliers or assignment rules depending on the country or type of event.
+
+11. **(Optional) Load more data or perform tests**  
+   - Use the procedures and views to run functional tests.
+
+---
+
+> 💡 **Tip:** Make sure to execute the scripts in the correct order to avoid cross-reference or foreign key errors.
 
 ---
 
