@@ -4,6 +4,7 @@
 
 - [🎶 Introducción](#-base-de-datos-para-control-logístico-de-conciertos-y-eventos)
 - [📊 Requisitos de Seguridad Base](#-requisitos-de-seguridad-base-ejemplo-argentina)
+- [🧪 Pasos para la ejecución de la base de datos](#-pasos-para-la-ejecución-de-la-base-de-datos)
 - [🧩 Descripción de Tablas](#-descripción-de-tablas)
   - [`Bands`](#1-bands)
   - [`Stadium`](#2-stadium)
@@ -53,6 +54,50 @@ Para eventos **musicales**, se establece el siguiente mínimo obligatorio de per
 
 - 👩‍⚕️ 1 Paramédico y 👨‍🚒 1 Bombero cada **200 asistentes**
 - 🧗‍♂️ 3 Rescatistas y 👮‍♂️ 3 Policías/Encargados de seguridad cada **200 asistentes**
+
+---
+
+## 🧪 Pasos para la ejecución de la base de datos
+
+A continuación se detallan los pasos necesarios para implementar correctamente esta base de datos en un entorno local o de desarrollo:
+
+1. **Crear la base de datos**  
+   - Ejecutar el script de creación de la base de datos (Link al archivo SQL que contiene la creacion) este archivo contiene la creacion de las tablas con sus respectivas claves relacionales y triggers.
+
+2. **Seleccionar la base de datos a utilizar**  
+   - Dentro del archivo (Link al archivo SQL que contiene la creacion) utilizar el comando `USE concertio ;`.
+
+3. **Crear todas las tablas**  
+   - Dentro del archivo (Link al archivo SQL que contiene la creacion) ejecutar el script SQL que contiene las definiciones de las tablas (`bands`, `stadium`, `staff`, etc.).
+
+4. **Crear los triggers**  
+   - Dentro del archivo (Link al archivo SQL que contiene la creacion) ejecutar la porcion del script que crea los triggers necesarios (`after_concert_insert`, y los de auditoría para `bands`, `stadium`, `concert`, `staff`).
+  
+5. **Crear vistas**  
+   - Ejecutar los scripts que generan las vistas (Link a la carpeta de creacion de vistas) haciendo click derecho en el apartado `Views` del schema (`asignation_details`, `concert_details`, `staff_details`).
+
+6. **Crear funciones**  
+   - Ejecutar los scripts que definen las funciones (Link a la carpeta de creacion de funciones) (`get_required_staff`, `get_specialty_multiplier`).
+  
+7. **Crear los procedimientos almacenados**  
+   - Ejecutar los scripts que definen los procedimientos (Link a la carpeta de creacion de funciones) (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
+
+8. **Insertar datos iniciales**  
+   - Cargar datos de prueba ejecutando el siguiente script (Link a la carpeta con el script de insercion de datos) o datos reales en las tablas principales (`bands`, `stadium`, `specialty`, `staff`, etc.).
+
+9. **Verificar el funcionamiento**  
+   - Insertar un concierto nuevo y comprobar si se asigna el staff automáticamente.  
+   - Revisar si los triggers de auditoría están registrando los cambios.
+
+10. **Adaptar parámetros si es necesario**  
+   - Cambiar multiplicadores o reglas de asignación según el país o tipo de evento.
+
+11. **(Opcional) Cargar más datos o realizar pruebas**  
+   - Utilizar los procedimientos y vistas para ejecutar pruebas funcionales.
+
+---
+
+> 💡 **Sugerencia:** Asegurate de ejecutar los scripts en el orden correcto para evitar errores de referencias cruzadas o claves foráneas.
 
 ---
 
