@@ -4,6 +4,7 @@
 
 - [🎶 Introduction](#-logistics-control-database-for-concerts-and-events)
 - [📊 Base Safety Requirements (Argentina Example)](#-base-safety-requirements-argentina-example)
+- [🔗 Entity-Relation diagram](http://github.com/MatiasFazzito/SQL/blob/main/Entity%20relation%20diagram.png)
 - [🧪 Steps to Run the Database](#-steps-to-run-the-database)
 - [🧩 Tables Overview](#-tables-overview)
   - [`Bands`](#1-bands)
