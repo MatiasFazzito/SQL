@@ -368,7 +368,7 @@ Esta sección describe las vistas creadas en la base de datos para facilitar el 
 
 ---
 
-### 📄 `asignation_details`
+### 📄 `assignment_details`
 
 **Descripción:**  
 Muestra una relación entre cada asignación de personal, el nombre del miembro del staff asignado y el estadio donde trabajará.
