@@ -337,7 +337,7 @@ Asigna automáticamente miembros del staff de una especialidad determinada a un 
 
 ---
 
-### 📌 `asign_staff_to_all_concerts()`
+### 📌 `assign_staff_to_all_concerts()`
 
 **Descripción:**  
 Realiza la asignación de personal para **todas las especialidades** en **todos los conciertos** registrados en la base de datos.
