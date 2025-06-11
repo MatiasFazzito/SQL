@@ -75,7 +75,7 @@ Below are the necessary steps to properly set up and run this database in a loca
 4. **Create the triggers**  
    - In the same [file](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Schema%20y%20Tables/ConcertIO_DB_Creation.sql), run the portion of the script that creates the necessary triggers (`after_concert_insert`, and audit triggers for `bands`, `stadium`, `concert`, `staff`).
 
-> 💡 **Pro Tip:** These first steps can be executed all at once by running the entire initial script file, which will leave the database mostly ready.
+> 💡 **Note:** These first steps can be executed all at once by running the entire initial script file, which will leave the database mostly ready.
 
 5. **Create views**  
    - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Views), run each script individually to generate the views by right-clicking on the `Views` section of the schema (`asignation_details`, `concert_details`, `staff_details`).
@@ -89,7 +89,7 @@ Below are the necessary steps to properly set up and run this database in a loca
 8. **Insert initial data**  
    - Load test data using this [script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20insertion/Mock_Data_Stress_Insertion.sql), or insert real data into the main tables (`bands`, `stadium`, `specialty`, `staff`, etc.).
 
-> 💡 **Tip:** Make sure to run the scripts in the correct order during this step to avoid foreign key or cross-reference errors. It is recommended to follow the order specified in the provided test data file.
+> 💡 **Note:** Make sure to run the scripts in the correct order during this step to avoid foreign key or cross-reference errors. It is recommended to follow the order specified in the provided test data file.
 
 9. **Verify functionality**  
    - Insert a new concert and check whether the staff is assigned automatically.  
@@ -103,7 +103,7 @@ Below are the necessary steps to properly set up and run this database in a loca
 
 ---
 
-> 💡 **Tip:** Make sure to execute the scripts in the correct order to avoid foreign key or cross-reference errors.
+> 💡 **Note:** Make sure to execute the scripts in the correct order to avoid foreign key or cross-reference errors.
 
 ---
 
@@ -339,7 +339,7 @@ Automatically assigns available staff members of a specific specialty to a speci
 
 ---
 
-### 📌 `asign_staff_to_all_concerts()`
+### 📌 `assign_staff_to_all_concerts()`
 
 **Description:**  
 Performs staff assignment for **all specialties** across **all concerts** registered in the database.
@@ -371,7 +371,7 @@ This section documents the views created in the database to simplify complex que
 
 ---
 
-### 📄 `asignation_details`
+### 📄 `assignment_details`
 
 **Description:**  
 Displays a relationship between each staff assignment, the assigned staff member's name, and the stadium where they will work.
