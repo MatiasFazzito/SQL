@@ -26,7 +26,7 @@
   - [`assign_specialty_to_concert`](#-assign_specialty_to_concertp_concert_id-int-p_specialty-int)
   - [`assign_staff_to_all_concerts`](#-assign_staff_to_all_concerts)
 - [🔍 List of Views](#-list-of-views)
-  - [`assignment_details`](#-assignment__details)
+  - [`assignment_details`](#-assignment_details)
   - [`concert_details`](#-concert_details)
   - [`staff_details`](#-staff_details)
 - [🧩 Future Adaptability](#-future-adaptability)
