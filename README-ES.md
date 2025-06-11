@@ -4,6 +4,7 @@
 
 - [🎶 Introducción](#-base-de-datos-para-control-logístico-de-conciertos-y-eventos)
 - [📊 Requisitos de Seguridad Base](#-requisitos-de-seguridad-base-ejemplo-argentina)
+- [🔗 Diagrama de Entidad-Relacion](http://github.com/MatiasFazzito/SQL/blob/main/Entity%20relation%20diagram.png)
 - [🧪 Pasos para la ejecución de la base de datos](#-pasos-para-la-ejecución-de-la-base-de-datos)
 - [🧩 Descripción de Tablas](#-descripción-de-tablas)
   - [`Bands`](#1-bands)
