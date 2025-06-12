@@ -33,8 +33,7 @@
 - [📦 Using the Data Warehouse for Manual Backup](#-using-the-data-warehouse-for-manual-backup)
 - [🧩 Future Adaptability](#-future-adaptability)
 - [📁 Use Cases](#-use-cases)
-
-
+- [📄 Safety Compliance Report for Concert Events](#-safety-compliance-report-for-concert-events)
 
 ---
 
@@ -467,6 +466,56 @@ All of this can be configured during the installation phase.
 - 🏟️ Stadium event logistics  
 - 🧑‍⚕️ Automated staff assignment based on crowd size  
 - 📊 Simulation and testing for different event types
+
+---
+
+## 📄 Safety Compliance Report for Concert Events
+
+### 🎯 Report Objective
+
+The purpose of this report is to evaluate **compliance with minimum safety standards** required for large-scale events, specifically musical concerts, based on the number of tickets sold and the staff assigned to each event by specialty.
+
+---
+
+### 🧾 Description of the Data Analyzed
+
+This analysis was conducted using real data from the **ConcertIO** system, including:
+
+- Detailed information on concerts (band, stadium, tickets sold).
+- Staff assigned to each concert, categorized by specialty:
+  - Paramedics  
+  - Firefighters  
+  - Rescuers  
+  - Security personnel
+- Applied safety regulations:
+  - 1 paramedic and 1 firefighter per 200 attendees  
+  - 3 rescuers and 3 security officers per 200 attendees
+
+For each concert, the minimum required staff per specialty was calculated and compared to the actual staff assigned.
+
+---
+
+### 📊 Dashboard Content
+
+The visual dashboard includes:
+
+- **Key Performance Indicators (KPIs):**
+  - Total number of concerts recorded  
+  - Percentage of events that meet safety standards  
+  - Total staff assigned per specialty
+
+- **Detailed tables by concert:**
+  - Comparison between required and assigned staff  
+  - Occupancy rate for each stadium  
+  - Visual compliance indicators (✅ / ❌)
+
+---
+
+### ✅ Conclusions
+
+The [report](https://github.com/MatiasFazzito/SQL/tree/main/Audit) makes it easy to identify which concerts meet the minimum safety requirements and which require additional staffing. This evaluation supports better **operational planning** and helps ensure safe conditions for large-scale events.
+
+Additionally, by integrating **stadium capacity** and **tickets sold**, the analysis enables tracking of the **actual occupancy rate** for each event, which is useful for logistics and for detecting potential **overselling of tickets**, a situation that could compromise both safety and audience experience.
 
 ---
 
