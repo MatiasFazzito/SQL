@@ -30,6 +30,7 @@
   - [`assignment_details`](#-assignment_details)
   - [`concert_details`](#-concert_details)
   - [`staff_details`](#-staff_details)
+- [📦 Using the Data Warehouse for Manual Backup](#-using-the-data-warehouse-for-manual-backup)
 - [🧩 Future Adaptability](#-future-adaptability)
 - [📁 Use Cases](#-use-cases)
 
@@ -101,6 +102,12 @@ Below are the necessary steps to properly set up and run this database in a loca
 
 11. **(Optional) Load more data or run additional tests**  
    - Use the procedures and views to perform functional tests.
+
+12. **Backup Generation**  
+   - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Data%20Warehouse), run the [Data Warehouse creation script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20Warehouse/DW_Schema_And_Tables_Creation.sql) to create the backup structure.
+
+13. **Backup Generation**  
+   - From this [folder](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Data%20Warehouse), run the [data insertion script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20Warehouse/DW_Data_Insertion.sql) to perform the backup.
 
 ---
 
@@ -429,6 +436,16 @@ Simplifies filtering and identification of staff based on their specialty.
 - `Staff_ID`
 - `Staff_Name`
 - `Specialty_Name`
+
+---
+
+## 📦 Using the Data Warehouse for Manual Backup
+
+In the context of the **ConcertIO** system, a **Data Warehouse (DW)** was implemented not only for historical analysis and reporting but also as a key mechanism for **manual data backup**.
+
+### 🧱 Data Warehouse Structure
+
+The Data Warehouse was implemented in a separate schema called `concertio_dw`, with tables that replicate the structure of key operational tables, such as concerts, staff, and assignments.
 
 ---
 
