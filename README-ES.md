@@ -30,6 +30,7 @@
   - [`assignment_details`](#-assignment_details)
   - [`concert_details`](#-concert_details)
   - [`staff_details`](#-staff_details)
+- [📦 Uso del Data Warehouse como Backup Manual](#-uso-del-data-warehouse-como-backup-manual)
 - [🧩 Adaptabilidad Futura](#-adaptabilidad-futura)
 - [📁 Casos de Uso](#-casos-de-uso)
 
@@ -83,7 +84,7 @@ A continuación se detallan los pasos necesarios para implementar correctamente 
    - Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Functions) Ejecutar uno por uno los scripts que definen las funciones (`get_required_staff`, `get_specialty_multiplier`).
   
 7. **Crear los procedimientos almacenados**  
-   -  Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Procedures) Ejecutar uno por uno los scripts que definen los procedimientos (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
+   - Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Procedures) Ejecutar uno por uno los scripts que definen los procedimientos (`assign_specialty_to_concert`, `asign_staff_to_all_concerts`).
 
 8. **Insertar datos iniciales**  
    - Cargar datos de prueba ejecutando el siguiente [script](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20insertion/Mock_Data_Stress_Insertion.sql) o datos reales en las tablas principales (`bands`, `stadium`, `specialty`, `staff`, etc.).
@@ -99,6 +100,12 @@ A continuación se detallan los pasos necesarios para implementar correctamente 
 
 11. **(Opcional) Cargar más datos o realizar pruebas**  
    - Utilizar los procedimientos y vistas para ejecutar pruebas funcionales.
+
+12. **Generado de backups**  
+   -  Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Data%20Warehouse) ejecutar el [script de creacion de Data Warehouse](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20Warehouse/DW_Schema_And_Tables_Creation.sql) para crear el la estructura del backup.
+
+13. **Generado de backups**  
+   -  Desde este [fichero](https://github.com/MatiasFazzito/SQL/tree/main/SQL%20Files/Data%20Warehouse) ejecutar el [script de insercion de datos](https://github.com/MatiasFazzito/SQL/blob/main/SQL%20Files/Data%20Warehouse/DW_Data_Insertion.sql) para realizar el backup.
 
 ---
 
@@ -426,6 +433,16 @@ Simplificar la identificación del staff según su especialidad sin necesidad de
 - `Staff_ID`
 - `Staff_Name`
 - `Specialty_Name`
+
+---
+
+## 📦 Uso del Data Warehouse como Backup Manual
+
+En el contexto del sistema **ConcertIO**, se implementó un **Data Warehouse (DW)** que, además de permitir el análisis histórico y la generación de reportes, cumple también una función clave como mecanismo de **respaldo manual** de los datos operativos.
+
+### 🧱 Estructura del Data Warehouse
+
+El Data Warehouse se implementó en un esquema independiente llamado `concertio_dw`, con tablas que replican la estructura de las tablas clave del sistema, como conciertos, staff y asignaciones.
 
 ---
 
