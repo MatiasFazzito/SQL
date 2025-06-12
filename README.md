@@ -473,7 +473,7 @@ All of this can be configured during the installation phase.
 
 ### 🎯 Report Objective
 
-The purpose of this report is to evaluate **compliance with minimum safety standards** required for large-scale events, specifically musical concerts, based on the number of tickets sold and the staff assigned to each event by specialty.
+The purpose of this [report](https://github.com/MatiasFazzito/SQL/tree/main/Audit) is to evaluate **compliance with minimum safety standards** required for large-scale events, specifically musical concerts, based on the number of tickets sold and the staff assigned to each event by specialty.
 
 ---
 
