@@ -513,7 +513,7 @@ The visual dashboard includes:
 
 ### ✅ Conclusions
 
-The report makes it easy to identify which concerts meet the minimum safety requirements and which require additional staffing. This evaluation supports better **operational planning** and helps ensure safe conditions for large-scale events.
+The [report](https://github.com/MatiasFazzito/SQL/tree/main/Audit) makes it easy to identify which concerts meet the minimum safety requirements and which require additional staffing. This evaluation supports better **operational planning** and helps ensure safe conditions for large-scale events.
 
 Additionally, by integrating **stadium capacity** and **tickets sold**, the analysis enables tracking of the **actual occupancy rate** for each event, which is useful for logistics and for detecting potential **overselling of tickets**, a situation that could compromise both safety and audience experience.
 
