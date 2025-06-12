@@ -472,7 +472,7 @@ Todo esto se puede configurar durante la fase de instalación.
 
 ### 🎯 Objetivo del informe
 
-El presente [informe]() tiene como finalidad evaluar el **cumplimiento de las normas mínimas de seguridad** establecidas para eventos masivos, específicamente conciertos musicales, utilizando como base la cantidad de entradas vendidas y el personal asignado a cada evento según su especialidad.
+El presente [informe](https://github.com/MatiasFazzito/SQL/tree/main/Audit) tiene como finalidad evaluar el **cumplimiento de las normas mínimas de seguridad** establecidas para eventos masivos, específicamente conciertos musicales, utilizando como base la cantidad de entradas vendidas y el personal asignado a cada evento según su especialidad.
 
 ---
 
@@ -512,7 +512,7 @@ El dashboard visual contiene:
 
 ### ✅ Conclusiones
 
-El informe permite identificar rápidamente qué conciertos cumplen con los requisitos mínimos de seguridad exigidos por la normativa vigente, y en cuáles es necesario reforzar la asignación de personal. Esta evaluación contribuye a optimizar la planificación operativa y a garantizar condiciones adecuadas para el desarrollo de eventos masivos.
+El [informe](https://github.com/MatiasFazzito/SQL/tree/main/Audit) permite identificar rápidamente qué conciertos cumplen con los requisitos mínimos de seguridad exigidos por la normativa vigente, y en cuáles es necesario reforzar la asignación de personal. Esta evaluación contribuye a optimizar la planificación operativa y a garantizar condiciones adecuadas para el desarrollo de eventos masivos.
 
 Además, el análisis integrado de la **capacidad del estadio** y la **cantidad de entradas vendidas** permite realizar un seguimiento del **porcentaje de ocupación real** por evento, lo cual resulta útil tanto para fines logísticos como para detectar posibles **situaciones de sobreventa de tickets**, que podrían comprometer la seguridad y la experiencia del público.
 
