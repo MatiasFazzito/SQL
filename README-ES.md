@@ -33,6 +33,7 @@
 - [📦 Uso del Data Warehouse como Backup Manual](#-uso-del-data-warehouse-como-backup-manual)
 - [🧩 Adaptabilidad Futura](#-adaptabilidad-futura)
 - [📁 Casos de Uso](#-casos-de-uso)
+- [📄 Informe de Cumplimiento de Normas de Seguridad en Conciertos](#-informe-de-cumplimiento-de-normas-de-seguridad-en-conciertos)
 
 ---
 
@@ -464,6 +465,56 @@ Todo esto se puede configurar durante la fase de instalación.
 - 🏟️ Logística de eventos en estadios  
 - 🧑‍⚕️ Asignación automática de personal según el público estimado  
 - 📊 Simulación y pruebas para distintos tipos de eventos
+
+---
+
+## 📄 Informe de Cumplimiento de Normas de Seguridad en Conciertos
+
+### 🎯 Objetivo del informe
+
+El presente [informe]() tiene como finalidad evaluar el **cumplimiento de las normas mínimas de seguridad** establecidas para eventos masivos, específicamente conciertos musicales, utilizando como base la cantidad de entradas vendidas y el personal asignado a cada evento según su especialidad.
+
+---
+
+### 🧾 Descripción de los datos analizados
+
+Este análisis se realizó en base a los datos reales del sistema **ConcertIO**, incluyendo:
+
+- Información detallada de los conciertos (banda, estadio, entradas vendidas).
+- Personal asignado por concierto, clasificado por especialidad:
+  - Paramédicos  
+  - Bomberos  
+  - Rescatistas  
+  - Personal de seguridad
+- Reglas de seguridad aplicadas:
+  - 1 paramédico y 1 bombero cada 200 asistentes  
+  - 3 rescatistas y 3 agentes de seguridad cada 200 asistentes
+
+Se calculó, para cada concierto, la cantidad mínima de personal requerido por especialidad y se comparó con el personal realmente asignado.
+
+---
+
+### 📊 Contenido del dashboard
+
+El dashboard visual contiene:
+
+- **Indicadores clave (KPI):**
+  - Total de conciertos registrados  
+  - Porcentaje de eventos que cumplen con la normativa  
+  - Total de personal asignado por especialidad
+
+- **Tablas de detalle por concierto:**
+  - Comparación entre requerimiento y asignación  
+  - Porcentaje de ocupación de cada estadio  
+  - Indicadores visuales de cumplimiento (✅ / ❌)
+
+---
+
+### ✅ Conclusiones
+
+El [informe](https://github.com/MatiasFazzito/SQL/blob/main/Audit/Mock_Report.xlsx) permite identificar rápidamente qué conciertos cumplen con los requisitos mínimos de seguridad exigidos por la normativa vigente, y en cuáles es necesario reforzar la asignación de personal. Esta evaluación contribuye a optimizar la planificación operativa y a garantizar condiciones adecuadas para el desarrollo de eventos masivos.
+
+Además, el análisis integrado de la **capacidad del estadio** y la **cantidad de entradas vendidas** permite realizar un seguimiento del **porcentaje de ocupación real** por evento, lo cual resulta útil tanto para fines logísticos como para detectar posibles **situaciones de sobreventa de tickets**, que podrían comprometer la seguridad y la experiencia del público.
 
 ---
 
