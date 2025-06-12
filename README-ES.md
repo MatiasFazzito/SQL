@@ -512,7 +512,7 @@ El dashboard visual contiene:
 
 ### ✅ Conclusiones
 
-El [informe](https://github.com/MatiasFazzito/SQL/tree/main/Audit) permite identificar rápidamente qué conciertos cumplen con los requisitos mínimos de seguridad exigidos por la normativa vigente, y en cuáles es necesario reforzar la asignación de personal. Esta evaluación contribuye a optimizar la planificación operativa y a garantizar condiciones adecuadas para el desarrollo de eventos masivos.
+El informe permite identificar rápidamente qué conciertos cumplen con los requisitos mínimos de seguridad exigidos por la normativa vigente, y en cuáles es necesario reforzar la asignación de personal. Esta evaluación contribuye a optimizar la planificación operativa y a garantizar condiciones adecuadas para el desarrollo de eventos masivos.
 
 Además, el análisis integrado de la **capacidad del estadio** y la **cantidad de entradas vendidas** permite realizar un seguimiento del **porcentaje de ocupación real** por evento, lo cual resulta útil tanto para fines logísticos como para detectar posibles **situaciones de sobreventa de tickets**, que podrían comprometer la seguridad y la experiencia del público.
 
